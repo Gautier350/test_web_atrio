@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personne{% endblock %}
+
+{% block body %}
+    <h1>Liste des enregistrements</h1>
+
+    <table>
+        <tr>
+            <td>Nom</td>
+            <td>Prénom</td>
+            <td>Date de naissance</td>
+        </tr>
+        {% for personne in personnes %}
+            <tr>
+                <td>{{ personne.nom }}</td>
+                <td>{{ personne.prenom }}</td>
+                <td>{{ personne.dateNaissance|date("d/m/y") }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{path("app_personne")}}">
+        Back
+    </a>
+
+
+{% endblock %}
