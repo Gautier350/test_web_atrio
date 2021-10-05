@@ -21,20 +21,12 @@ class PersonneController extends AbstractController
         $personne = new Personne();
         $form = $this->createForm(PersonneType::class, $personne);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $date = $form['date_naissance']->getData();
-            $today = new \DateTime("now");
-
-            $interval = date_diff($date, $today);
-            if ($interval->y < 150) {
-                $em->persist($personne);
-                $em->flush();
-                $this->addFlash('success', "L'enregistrement s'est bien effectué");
-            } else {
-                $this->addFlash('success', "La date ne peut être supérieure à 150 ans");
-            }
-
+            $em->persist($personne);
+            $em->flush();
+            $this->addFlash('success', "L'enregistrement s'est bien effectué");
+        } else {
+            $this->addFlash('success', "Problème d'enregistrement");
         }
 
         return $this->render('personne/index.html.twig', ['form' => $form->createView()]);
@@ -45,7 +37,7 @@ class PersonneController extends AbstractController
      */
     public function show(PersonneRepository $personneRepository): Response
     {
-        $personnes=$personneRepository->findBy([], ['nom' => 'DESC']);
-        return $this->render('personne/show.html.twig',compact("personnes"));
+        $personnes = $personneRepository->findBy([], ['nom' => 'DESC']);
+        return $this->render('personne/show.html.twig', compact("personnes"));
     }
 }

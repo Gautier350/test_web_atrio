@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Personne;
+use App\Validator\ConstraintsDate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -19,6 +20,11 @@ class PersonneType extends AbstractType
             ->add('date_naissance', DateType::class, [
                 'widget'=>'single_text',
                 'required'=>true,
+                'constraints'=>([
+                    new ConstraintsDate([
+                        'year' => 150,
+                    ]),
+                ])
             ])
         ;
     }
