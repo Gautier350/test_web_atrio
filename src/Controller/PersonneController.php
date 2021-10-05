@@ -19,6 +19,7 @@ class PersonneController extends AbstractController
     public function index(Request $request, EntityManagerInterface $em): Response
     {
         $personne = new Personne();
+        $personne->setDateNaissance(new \DateTimeImmutable);
         $form = $this->createForm(PersonneType::class, $personne);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

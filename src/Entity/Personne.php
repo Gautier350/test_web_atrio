@@ -33,7 +33,6 @@ class Personne
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank
      */
     private $date_naissance;
 
