@@ -25,8 +25,6 @@ class PersonneController extends AbstractController
             $em->persist($personne);
             $em->flush();
             $this->addFlash('success', "L'enregistrement s'est bien effectué");
-        } else {
-            $this->addFlash('success', "Problème d'enregistrement");
         }
 
         return $this->render('personne/index.html.twig', ['form' => $form->createView()]);
